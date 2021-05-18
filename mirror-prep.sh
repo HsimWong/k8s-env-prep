@@ -35,5 +35,5 @@ for imageName in ${images[@]} ; do
 done
 docker pull coredns/coredns:1.8.0
 docker tag coredns/coredns:1.8.0 k8s.gcr.io/coredns/coredns:v1.8.0
-docker rmi coredns/coredns:v1.8.0
+docker rmi coredns/coredns:1.8.0
 
