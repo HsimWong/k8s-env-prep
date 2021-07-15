@@ -1,7 +1,8 @@
 echo "Installing docker and its components\n"
 sudo apt-get remove docker docker-engine docker.io
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+#curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 archi=`dpkg --print-architecture`
 sudo add-apt-repository \
    "deb [arch=$archi] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu \
@@ -11,10 +12,11 @@ sudo apt-get update
 sudo apt install -y docker-ce
 echo "Provisioning environment for kubernetes"
 echo "----------------------------------------"
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add -
+#curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 sudo add-apt-repository 'deb https://mirrors.tuna.tsinghua.edu.cn/kubernetes/apt kubernetes-xenial main'
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
-sudo apt install kubeadm
+sudo apt install kubeadm -y
 echo "Preparing virtualization environment"
 sudo apt install libvirt-daemon libvirt0 libvirt-clients libvirt-bin -y
 sudo chmod 777 /run/user/0/
@@ -35,4 +37,3 @@ for imageName in "${array[@]}" ; do
    docker rmi coredns/coredns:1.8.0
   fi
 done
-
