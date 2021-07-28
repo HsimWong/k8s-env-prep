@@ -37,3 +37,7 @@ for imageName in "${array[@]}" ; do
    docker rmi coredns/coredns:1.8.0
   fi
 done
+
+kubeadm init --pod-network-cidr=172.16.0.0/16
+wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubectl apply -f kube-flannel.sh
